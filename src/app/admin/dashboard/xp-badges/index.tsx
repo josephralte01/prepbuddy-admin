@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/label'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import BadgeCard from './components/BadgeCard';
 
 type XPBadge = {
   _id: string
@@ -138,17 +139,7 @@ export default function XPBadgesPage() {
           {badges.length === 0 && <p>No badges defined yet.</p>}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {badges.map((badge) => (
-              <div key={badge._id} className="border p-4 rounded space-y-2 shadow">
-                <img src={badge.imageUrl} alt={badge.name} className="w-16 h-16 rounded" />
-                <div>
-                  <h2 className="font-bold">{badge.name}</h2>
-                  <p className="text-sm text-muted-foreground">{badge.description}</p>
-                  <p className="text-sm font-medium">XP: {badge.xpRequired}</p>
-                </div>
-                <Button variant="destructive" onClick={() => handleDelete(badge._id)}>
-                  Delete
-                </Button>
-              </div>
+              <BadgeCard key={badge._id} badge={badge} onDelete={handleDelete} />
             ))}
           </div>
         </CardContent>
